@@ -1,0 +1,25 @@
+*** Settings ***
+Library			Selenium2Library
+Suite Setup		Go to Google
+Suite Teardown	Close All Browsers
+
+
+*** Test Cases ***
+Ensure the capital of a country is displayed
+	Search and check		Russia				Moskau
+	Search and check		France				Paris
+	Search and check		The Netherlands		Amsterdam
+	Search and check		Denmark				werftyhuj
+
+
+
+*** Keywords ***
+Go to Google
+	Open Browser	https://google.com		chrome
+
+
+Search and check
+	[Arguments]		${query}	${expected_result}
+	Input Text		id=lst-ib	${query}
+	Click Button	id=_fZl
+	Wait Until Page Contains	${expected_result}
